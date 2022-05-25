@@ -1,28 +1,58 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { userContext } from "./context/userContext";
 
 function VehicleInfo() {
-  const { vehicleInfo, setVehicleInfo } = useContext(userContext);
+  const { currActive, reportInfo, setReportInfo, didUpdated } =
+    useContext(userContext);
+  useEffect(() => {
+    // console.log(didUpdated, ".....VehicleInfo.....");
+  }, [didUpdated]);
+
+  const renderYears = () => {
+    let i = 1990;
+    let arr = [];
+    while (i < 2022) {
+      arr.push(
+        <option value={`${i}`} key={i}>
+          {" "}
+          {i}{" "}
+        </option>
+      );
+      i++;
+    }
+    return arr;
+  };
   return (
     <div className="vehicle-info-container">
       <div className="vehicle-info-cotainer-a">
         <div>
-          <label> License: </label>
+          <label> License: </label>{" "}
           <input
+            value={reportInfo.license}
+            style={{
+              borderBottom: currActive === "license" ? "3px solid #55c57a" : "",
+            }}
             onChange={(ele) =>
-              setVehicleInfo({ ...vehicleInfo, license: ele.target.value })
+              setReportInfo({
+                ...reportInfo,
+                license: ele.target.value,
+              })
             }
             type="text"
             id="License"
             name="License"
           />
-        </div>
+        </div>{" "}
         <div>
-          <label id="vin-label">Last 4 number of VIN:</label>
+          <label id="vin-label"> Last 4 number of VIN: </label>{" "}
           <input
+            value={reportInfo.vin}
+            style={{
+              borderBottom: currActive === "vin" ? "3px solid #55c57a" : "",
+            }}
             onChange={(ele) =>
-              setVehicleInfo({
-                ...vehicleInfo,
+              setReportInfo({
+                ...reportInfo,
                 last4NumberOfVIN: ele.target.value,
               })
             }
@@ -30,17 +60,19 @@ function VehicleInfo() {
             id="VIN"
             name="VIN"
           />
-        </div>
-      </div>
+        </div>{" "}
+      </div>{" "}
       <div className="vehicle-info-cotainer-b">
         <div className="vehicle-info-cotainer-b--div">
-          <label className="vehicle-info-cotainer-b--label" for="make">
-            Make:
-          </label>
+          <label className="vehicle-info-cotainer-b--label">Make:</label>{" "}
           <select
+            value={reportInfo.make}
+            style={{
+              borderBottom: currActive === "make" ? "3px solid #55c57a" : "",
+            }}
             onChange={(ele) =>
-              setVehicleInfo({
-                ...vehicleInfo,
+              setReportInfo({
+                ...reportInfo,
                 make: ele.target.value,
               })
             }
@@ -48,21 +80,23 @@ function VehicleInfo() {
             id="make"
             name="make"
           >
-            <option disabled selected value></option>
-            <option value="Ford">Ford</option>
-            <option value="Dodge">Dodge</option>
-            <option value="Honda">Honda</option>
-          </select>
-        </div>
-      </div>
+            <option disabled> </option>
+            <option value="Ford"> Ford </option>{" "}
+            <option value="Dodge"> Dodge </option>{" "}
+            <option value="Honda"> Honda </option>{" "}
+          </select>{" "}
+        </div>{" "}
+      </div>{" "}
       <div className="vehicle-info-cotainer-b--div">
-        <label className="vehicle-info-cotainer-b--label" for="model">
-          Model:
-        </label>
+        <label className="vehicle-info-cotainer-b--label">Model:</label>{" "}
         <select
+          value={reportInfo.model}
+          style={{
+            borderBottom: currActive === "model" ? "3px solid #55c57a" : "",
+          }}
           onChange={(ele) =>
-            setVehicleInfo({
-              ...vehicleInfo,
+            setReportInfo({
+              ...reportInfo,
               model: ele.target.value,
             })
           }
@@ -70,27 +104,29 @@ function VehicleInfo() {
           id="model"
           name="model"
         >
-          <option disabled selected value></option>
-          <option value="Explorer - Ford">Explorer - Ford</option>
-          <option value="Edge - Ford">Edge - Ford</option>
-          <option value="Escape - Ford">Escape - Ford</option>
-          <option value="Ram - Dodge">Ram - Dodge</option>
-          <option value="Caliber - Dodge">Caliber - Dodge</option>
-          <option value="Journey - Dodge">Journey - Dodge</option>
-          <option value="Passport - Honda">Passport - Honda</option>
-          <option value="Pilot - Honda">Pilot - Honda</option>
-          <option value="Ridgeline - Honda">Ridgeline - Honda</option>
-        </select>
-      </div>
+          <option disabled> </option>{" "}
+          <option value="Explorer"> Explorer </option>{" "}
+          <option value="Edge"> Edge </option>{" "}
+          <option value="Escape "> Escape </option>{" "}
+          <option value="Ram"> Ram </option>{" "}
+          <option value="Caliber"> Caliber </option>{" "}
+          <option value="Journey"> Journey </option>{" "}
+          <option value="Passport"> Passport </option>{" "}
+          <option value="Pilot"> Pilot </option>{" "}
+          <option value="Ridgeline"> Ridgeline </option>{" "}
+        </select>{" "}
+      </div>{" "}
       <div className="vehicle-info-cotainer-b">
         <div className="vehicle-info-cotainer-b--div">
-          <label className="vehicle-info-cotainer-b--label" for="color">
-            Color:
-          </label>
+          <label className="vehicle-info-cotainer-b--label">Color:</label>{" "}
           <select
+            value={reportInfo.color}
+            style={{
+              borderBottom: currActive === "color" ? "3px solid #55c57a" : "",
+            }}
             onChange={(ele) =>
-              setVehicleInfo({
-                ...vehicleInfo,
+              setReportInfo({
+                ...reportInfo,
                 color: ele.target.value,
               })
             }
@@ -98,20 +134,21 @@ function VehicleInfo() {
             id="color"
             name="color"
           >
-            <option disabled selected value></option>
-            <option value="Red">Red</option>
-            <option value="Black">Black</option>
-            <option value="White">White</option>
-          </select>
-        </div>
+            <option disabled> </option> <option value="Red"> Red </option>{" "}
+            <option value="Black"> Black </option>{" "}
+            <option value="White"> White </option>{" "}
+          </select>{" "}
+        </div>{" "}
         <div className="vehicle-info-cotainer-b--div">
-          <label className="vehicle-info-cotainer-b--label" for="year">
-            Year:
-          </label>
+          <label className="vehicle-info-cotainer-b--label">Year:</label>{" "}
           <select
+            value={reportInfo.year}
+            style={{
+              borderBottom: currActive === "year" ? "3px solid #55c57a" : "",
+            }}
             onChange={(ele) =>
-              setVehicleInfo({
-                ...vehicleInfo,
+              setReportInfo({
+                ...reportInfo,
                 year: ele.target.value,
               })
             }
@@ -119,13 +156,10 @@ function VehicleInfo() {
             id="year"
             name="year"
           >
-            <option disabled selected value></option>
-            <option value="2001">2001</option>
-            <option value="2002">2002</option>
-            <option value="2003">2003</option>
-          </select>
-        </div>
-      </div>
+            <option disabled> </option> {renderYears()}
+          </select>{" "}
+        </div>{" "}
+      </div>{" "}
     </div>
   );
 }

@@ -568,3 +568,32 @@ text-align: center;
   right: 20px;
   top:30px;
 }
+
+/* custom select  */
+
+.css-14el2xx-placeholder{
+  display: none;
+ 
+}
+
+.css-tlfecz-indicatorContainer{
+  position: relative;
+  right: -95.5%;
+  top:6px;
+  width: 32px !important;
+}
+
+.css-1okebmr-indicatorSeparator{
+display: none;
+}
+
+.css-tj5bde-Svg{
+  fill: rgba(0, 0, 0, 0.76) !important;
+}
+
+.css-1hb7zxy-IndicatorsContainer{
+border-bottom: 2px solid rgba(0, 0, 0, 0.26);
+width: 80% !important;
+position: absolute;
+right: 20px;
+}
